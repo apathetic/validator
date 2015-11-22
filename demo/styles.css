@@ -1,0 +1,68 @@
+form {
+	background: #fff;
+	padding: 1em !important;
+}
+
+.form-group {
+	margin-bottom: 1em;
+}
+
+label {
+	display: block;
+}
+
+input, textarea {
+	outline: 0;
+	border: 1px solid #ddd;
+	padding: 0.5em 1em;
+}
+
+textarea {
+	height: 8em;
+}
+
+.character-count {
+	position: absolute;
+	bottom: 3em;
+	font-size: 0.6em;
+}
+
+.font-small {
+	font-size: 0.8em;
+}
+
+.error-message {
+	display: none;
+	color: red;
+}
+
+.valid {
+	color: green;
+}
+
+.has-error {
+	border-color: red;
+}
+
+.has-error + .error-message {
+	display: block;
+}
+
+
+/*
+.has-error input,
+.has-error textarea {
+	border-color: red;
+}
+
+.has-error .error-message {
+	display: block;
+}
+*/
+
+
+
+
+.hidden {
+	display:none
+}

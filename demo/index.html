@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>Validator.</title>
+    <meta name="viewport" content="width=device-width">
+
+	<link rel="stylesheet" href="styles.css">
+	<script src="../src/validator.js"></script>
+
+	<!-- demo stuffs -->
+	<link rel="stylesheet" href="showcase-styles.css">
+	<script src="prism.js"></script>
+	<script src="https://cdn.rawgit.com/apathetic/stickynav/master/dist/stickynav.min.js"></script>
+	<script>
+		window.addEventListener('DOMContentLoaded', function() {
+			stickyNav.init({ nav: '#sticky' });
+		});
+	</script>
+	<!-- end demo stuffs -->
+
+</head>
+
+<body>
+
+	<header>
+		<h1>Validator.</h1>
+	</header>
+
+	<nav>
+		<div id="sticky">
+			<div class="container">
+				<nav data-autogenerate="true">
+					<ul></ul>
+				</nav>
+			</div>
+		</div>
+	</nav>
+
+	<main class="site left-rail">
+
+		<section data-nav="About" id="about">
+			<div class="container">
+				<h2>About</h2>
+				<p>This a simple, extensible client-side validation object. It's "simple" because it includes only a
+					small and basic set of valdation functions. However, it's very easily extensible so you may add
+					your own types of validation methods.</p>
+
+				<h3>A Note On Approaches</h3>
+				<p>There are quite a few client-side validators out there. Most require a particular framework; however,
+					this one does not.  Additioannly, rather than create a bloaty, full-featured validator, the appraoc
+					herein is quite the opposite. This is abasic validatora that should cover the majrity of use-cases.
+					If not, you can easily add your own tests....</p>
+			</div>
+		</section>
+
+		<section data-nav="Download" id="download">
+			<div class="container">
+				<h2>Download</h2>
+				<h3>Github</h3>
+				<p><a href="https://github.com/apathetic/validator">Get it from Github</a></p>
+			</div>
+		</section>
+
+		<section data-nav="Demo" id="demo">
+			<div class="container">
+				<h2>Demo</h2>
+
+				<form id="demo-form" novalidate>
+
+					<div class="form-group">
+						<label class="font-small" for="name">Your Name</label>
+						<input id="name" name="name" required />
+						<span class="error-message font-small">Please enter your name</span>
+					</div>
+
+					<div class="form-group">
+						<label class="font-small" for="email">Your Email</label>
+						<input id="email" name="email" data-validate="email" required />
+						<span class="error-message font-small">Please enter your email</span>
+					</div>
+
+					<div class="form-group">
+						<label class="font-small" for="phone">Phone</label>
+						<input id="phone" name="phone" data-validate="phone" required />
+						<span class="error-message font-small">Please enter your phone number</span>
+					</div>
+
+
+					<div class="form-group">
+						<label class="font-small" for="comment">Message</label>
+						<textarea name="comment" placeholder="Using a custom validation method! Try typing more than 40 characters" data-validate="count" required></textarea>
+						<span class="error-message font-small">Please add a message</span>
+						<span class="character-count"><i>40</i> characters left</span>
+					</div>
+
+
+					<div class="form-group">
+						<label class="font-small" for="officeLocation">Your Country</label>
+						<div class="select">
+							<select id="officeLocation" name="country" required>
+								<option value="" disabled>Select your country</option>
+								<option value="AO">Angola</option>
+								<option value="AR">Argentina</option>
+								<option value="AU">Australia</option>
+								<option value="AT">Austria</option>
+								<option value="BE">Belgium</option>
+							</select>
+							<span class="error-message font-small">Please select your country</span>
+						</div>
+					</div>
+
+					<ul class="radio-buttons form-group">
+						<li>
+							<input type="radio" name="gender" value="male" id="male" required />
+							<label class="font-small" class="button button-white" for="male">
+								<i class="icon icon-male"></i>Male
+							</label>
+						</li>
+						<li>
+							<input type="radio" name="gender" value="female" id="female" required />
+							<label class="font-small" class="button button-white" for="female">
+								<i class="icon icon-female"></i>Female
+							</label>
+						</li>
+					</ul>
+
+					<button>Submit</button>
+
+					<div class="hidden valid">Congrats, no errors here!</div>
+				</form>
+
+			</div>
+		</section>
+
+		<section data-nav="Prereqs" id="prereqs">
+			<div class="container">
+				<h2>Prereqs</h2>
+				<p>none.</p>
+			</div>
+		</section>
+
+		<section data-nav="Compatibility" id="compatibility">
+			<div class="container">
+				<h2>Compatibility</h2>
+				<ul>
+					<li>IE8+</li>
+					<li>Firefox, Webkit, Opera</li>
+					<li>iOS, Androie</li>
+				</ul>
+			</div>
+		</section>
+
+		<section data-nav="Code" id="code">
+			<div class="container">
+				<h2>Code</h2>
+				<pre><code class="language-javascript">
+					var validator = new Validator();
+				</pre></code>
+
+				validator.updateRule('count', function count(val) {
+					return val.length <= 40;
+				});
+
+				var form = document.querySelector('#demo-form');
+				valid = validator.check(group);
+
+
+			</div>
+		</section>
+
+		<section data-nav="Options" id="options">
+			<div class="container">
+				<h2>Options</h2>
+				<div class="table-responsive">
+					<table class="table table-bordered table-striped">
+						<thead>
+							<tr>
+								<th style="width: 100px;">Name</th>
+								<th style="width: 50px;">type</th>
+								<th style="width: 50px;">default</th>
+								<th>description</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<td>el</td>
+								<td>string</td>
+								<td>.parallax</td>
+								<td>selector of elements to parallax-ify</td>
+							</tr>
+							<tr>
+								<td>mode</td>
+								<td>integer</td>
+								<td>1</td>
+								<td>There are two different modes:<br />
+									Start parallaxing items only when they appear on screen (mode 1, default) *<br />
+									Parallax items immediately on load, irrespective of where they are on the page. (mode 0)
+								</td>
+							</tr>
+							<tr>
+								<td>range</td>
+								<td>integer</td>
+								<td>200</td>
+								<td>The total distance (in px) to parallax an element. Only applies when parallax mode = 1</td>
+							</tr>
+							<tr>
+								<td>data-parallax-speed</td>
+								<td>string</td>
+								<td>0</td>
+								<td>Data attribute on the element specifying the speed of parallax. Some examples:<br />
+									<b>-1</b>: translate up as fast as you scroll up (ie. moving upwards at 2x the scroll)<br />
+									<b>0</b>: normal (ie. no translation)<br />
+									<strong>1</strong>: translate down as fast as you scroll up (ie. "fixed" position)<br />
+								</td>
+							</tr>
+						</tbody>
+					</table>
+					<p>* note: if an element loads within the viewport, the engine will calculate the amount of parallax based on
+					its position and adjust accordingly. Because of this, it may be a good idea to only fire the init() function
+					after all assets (ie. images, etc) have loaded.</p>
+				</div>
+			</div>
+		</section>
+
+	</main>
+
+
+	<footer>
+		<div class="container">
+		</div>
+	</footer>
+
+
+	<script>
+		function validate() {
+			var form = document.querySelector('#demo-form');
+			var message = document.querySelector('.valid');
+			var validator = new Validator();
+
+			/*
+			 * You update it with your own rules!
+			 */
+			validator.updateRule('count', function count(val) {
+				return val.length <= 40;
+			});
+
+			form.addEventListener('submit', function(e) {
+				e.preventDefault();
+
+				/**
+				 * Lets validate the form in "groups". We can divide it up however we like,
+				 * or pass in the form in its entirety
+				 */
+				var groups = form.querySelectorAll('.form-group');
+				var valid = true;
+
+				Array.prototype.forEach.call(groups, function(group){
+
+					/*
+					 * Here is where we check every form group. If any fail, we keep track
+					 * with valid but still keep going through the rest -- we want to check
+					 * them too and to bind the appropriate listeners
+					 */
+					valid = validator.check(group) && valid;
+				});
+
+				if (valid) {
+					message.classList.remove('hidden');
+				} else {
+					e.stopImmediatePropagation();
+					message.classList.add('hidden');
+					document.querySelector('.has-error').scrollIntoView();		// grabs first in document
+				}
+			});
+		}
+
+		window.addEventListener('DOMContentLoaded', validate);
+
+</script>
+
+
+</body>
+
+</html>
