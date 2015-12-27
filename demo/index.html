@@ -29,17 +29,17 @@
 		<h1>Validator.</h1>
 	</header>
 
-	<nav>
-		<div id="sticky">
-			<div class="container">
-				<nav data-autogenerate="true">
-					<ul></ul>
-				</nav>
-			</div>
-		</div>
-	</nav>
+	<main class="component left-rail">
 
-	<main class="site left-rail">
+		<nav>
+			<div id="sticky">
+				<div class="container">
+					<nav data-autogenerate="true">
+						<ul></ul>
+					</nav>
+				</div>
+			</div>
+		</nav>
 
 		<section data-nav="About" id="about">
 			<div class="container">
@@ -48,11 +48,11 @@
 					small and basic set of valdation functions. However, it's very easily extensible so you may add
 					your own types of validation methods.</p>
 
-				<h3>A Note On Approaches</h3>
-				<p>There are quite a few client-side validators out there. Most require a particular framework; however,
-					this one does not.  Additioannly, rather than create a bloaty, full-featured validator, the appraoc
-					herein is quite the opposite. This is abasic validatora that should cover the majrity of use-cases.
-					If not, you can easily add your own tests....</p>
+				<h3>Introduction</h3>
+				<p>There are quite a few client-side validators out there. However, while most require a particular
+					accompanying Javascript framework, this one does not. Additionally, rather than a bloaty,
+					full-featured validator, the approach taken	herein is to create a basic validator that covers most
+					general use-cases. If it doesn't cover yours, you can easily add your own custom tests.</p>
 			</div>
 		</section>
 
@@ -79,21 +79,21 @@
 					<div class="form-group">
 						<label class="font-small" for="email">Your Email</label>
 						<input id="email" name="email" data-validate="email" required />
-						<span class="error-message font-small">Please enter your email</span>
+						<span class="error-message font-small">Please enter a valid email</span>
 					</div>
 
 					<div class="form-group">
 						<label class="font-small" for="phone">Phone</label>
 						<input id="phone" name="phone" data-validate="phone" required />
-						<span class="error-message font-small">Please enter your phone number</span>
+						<span class="error-message font-small">Please enter your phone number and area code</span>
 					</div>
 
 
 					<div class="form-group">
 						<label class="font-small" for="comment">Message</label>
 						<textarea name="comment" placeholder="Using a custom validation method! Try typing more than 40 characters" data-validate="count" required></textarea>
-						<span class="error-message font-small">Please add a message</span>
-						<span class="character-count"><i>40</i> characters left</span>
+						<span class="error-message font-small">Please add a message that is 90 characters or less</span>
+						<span class="character-count"><i>90</i> characters left</span>
 					</div>
 
 
@@ -127,7 +127,7 @@
 						</li>
 					</ul>
 
-					<button>Submit</button>
+					<button class="button">Submit</button>
 
 					<div class="hidden valid">Congrats, no errors here!</div>
 				</form>
@@ -156,16 +156,22 @@
 		<section data-nav="Code" id="code">
 			<div class="container">
 				<h2>Code</h2>
+
+				<h3>Check fields in a form</h3>
 				<pre><code class="language-javascript">
-					var validator = new Validator();
+	var validator = new Validator();
+	var form = document.querySelector('#demo-form');
+	var valid = validator.check(form);
 				</pre></code>
 
-				validator.updateRule('count', function count(val) {
-					return val.length <= 40;
-				});
+				<h3>Adding a custom rule</h3>
+				<pre><code class="language-javascript">
+	// add a rule called "count" that checks an input's length
+	validator.updateRule('count', function count(val) {
+		return val.length <= 90;
+	});
+				</pre></code>
 
-				var form = document.querySelector('#demo-form');
-				valid = validator.check(group);
 
 
 			</div>
@@ -244,7 +250,7 @@
 			 * You update it with your own rules!
 			 */
 			validator.updateRule('count', function count(val) {
-				return val.length <= 40;
+				return val.length <= 90;
 			});
 
 			form.addEventListener('submit', function(e) {
@@ -277,7 +283,28 @@
 			});
 		}
 
+		function characterCounter() {
+			var textarea = document.querySelector('textarea');
+			var count = document.querySelector('.character-count');
+			var num = count ? count.querySelector('i') : 0;
+
+			textarea.addEventListener('keyup', checkLength);
+			checkLength();
+
+			function checkLength(e) {
+				var remaining = 90 - textarea.value.length;
+				num.innerHTML = remaining;
+				if (remaining < 0) {
+					count.classList.add('has-error');
+				} else {
+					count.classList.remove('has-error');
+				}
+			}
+		}
+
 		window.addEventListener('DOMContentLoaded', validate);
+		window.addEventListener('DOMContentLoaded', characterCounter);
+
 
 </script>
 
