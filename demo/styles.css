@@ -5,39 +5,57 @@ form {
 
 .form-group {
 	margin-bottom: 2em;
+	max-width: 400px;
 }
-/*
-@media (min-width: 768px) {
-	.form-group {
-		width: 50%;
-		float: left;
-		padding: 1em;
-	}
-}*/
 
 label {
 	display: block;
 }
 
-input, textarea {
+input, textarea, select {
 	font-size: 1em;
 	line-height: 1.5;
 	outline: 0;
 	border: 1px solid #ddd;
+	border-radius: 0;
 	padding: 1em;
 	width: 100%;
-	max-width: 360px;
+}
+
+select {
+	appearance: none;
+	-webkit-appearance: none;
 }
 
 textarea {
 	height: 12em;
 }
 
+input[type="radio"] {
+	width: auto;
+	display: inline-block;
+}
+
+input[type="radio"] + label {
+	display: inline-block;
+}
+
+input:focus, textarea:focus, select:focus {
+	border-color: #333;
+}
+
+.select:after {
+    content: "▾";
+    position: absolute;
+    right: 1em;
+    top: 1em;
+}
+
 .character-count {
 	position: absolute;
-	top: 14em;
+	top: 0;
+	text-align: right;
     font-size: 0.8em;
-    text-align: center;
     width: 100%;
 }
 
@@ -62,20 +80,9 @@ textarea {
 	display: block;
 }
 
-
-/*
-.has-error input,
-.has-error textarea {
-	border-color: red;
+.has-error.character-count {
+	color: red;
 }
-
-.has-error .error-message {
-	display: block;
-}
-*/
-
-
-
 
 .hidden {
 	display:none
