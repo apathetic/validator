@@ -25,6 +25,7 @@ input, textarea, select {
 select {
 	appearance: none;
 	-webkit-appearance: none;
+	-moz-appearance: none;
 }
 
 textarea {
