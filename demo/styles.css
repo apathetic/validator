@@ -34,8 +34,25 @@ textarea {
 
 input[type="radio"] {
 	width: auto;
-	display: inline-block;
+
+
+    /* */
+	-webkit-appearance: none;
+	-moz-appearance: none;
+	appearance: none;
+	border-radius: 50%;
+	padding: 8px;
+	bottom: -6px;
+	/* */
 }
+
+/* */
+input[type="radio"]:checked {
+    border: 6px solid #0096d6;
+    padding: 3px;
+}
+/* */
+
 
 input[type="radio"] + label {
 	display: inline-block;
