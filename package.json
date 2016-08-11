@@ -4,9 +4,9 @@
   "author": "wes hatch",
   "version": "0.1.0",
   "license": "MIT",
-  "main": "./dist/parallax.cjs.js",
-  "broswer": "./dist/parallax.browser.js",
-  "jsnext:main": "./dist/parallax.es6.js",
+  "main": "./dist/validator.cjs.js",
+  "broswer": "./dist/validator.browser.js",
+  "jsnext:main": "./dist/validator.es6.js",
   "repository": {
     "type": "git",
     "url": "https://github.com/apathetic/validator.git"
