@@ -5,7 +5,7 @@
   "version": "0.1.1",
   "license": "MIT",
   "main": "./dist/validator.cjs.js",
-  "broswer": "./dist/validator.browser.js",
+  "broswer": "./dist/validator.js",
   "jsnext:main": "./dist/validator.es6.js",
   "repository": {
     "type": "git",

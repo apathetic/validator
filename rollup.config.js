@@ -10,6 +10,6 @@ export default {
   targets: [
     { dest: 'dist/validator.cjs.js', format: 'cjs' },
     { dest: 'dist/validator.es6.js', format: 'es' },
-    { dest: 'dist/validator.browser.js', format: 'iife' }
+    { dest: 'dist/validator.js', format: 'iife' }
   ]
 };
