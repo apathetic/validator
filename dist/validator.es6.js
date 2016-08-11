@@ -22,7 +22,7 @@ var rules = {
 // 	constructor() {
 //
 
-export default {
+var validator = {
   /**
    * Checks all fields within the given section
    *
@@ -122,3 +122,5 @@ export default {
     }
   }
 };
+
+export default validator;

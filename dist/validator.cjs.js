@@ -1,3 +1,5 @@
+'use strict';
+
 /*
  * validator
  * https://github.com/apathetic/validator
@@ -22,7 +24,7 @@ var rules = {
 // 	constructor() {
 //
 
-export default {
+var validator = {
   /**
    * Checks all fields within the given section
    *
@@ -122,3 +124,5 @@ export default {
     }
   }
 };
+
+module.exports = validator;

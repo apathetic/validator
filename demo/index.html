@@ -8,7 +8,7 @@
 	<meta name="viewport" content="width=device-width">
 
 	<link rel="stylesheet" href="styles.css">
-	<script src="../src/validator.js"></script>
+	<script src="../dist/validator.browser.js"></script>
 
 	<!-- demo stuffs -->
 	<link rel="stylesheet" href="https://apathetic.github.io/showcase/assets/css/main.min.css">
@@ -218,12 +218,12 @@
 		function validate() {
 			var form = document.querySelector('#demo-form');
 			var message = document.querySelector('.valid');
-			var validator = new Validator();
+			// var validator = new Validator();
 
 			/*
 			 * You update it with your own rules!
 			 */
-			validator.updateRule('count', function count(val) {
+			Validator.updateRule('count', function count(val) {
 				return val.length <= 40;
 			});
 
@@ -244,7 +244,7 @@
 					 * with valid but still keep going through the rest -- we want to check
 					 * them too and to bind the appropriate listeners
 					 */
-					valid = validator.check(group) && valid;
+					valid = Validator.check(group) && valid;
 				});
 
 				if (valid) {
