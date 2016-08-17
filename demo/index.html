@@ -43,16 +43,17 @@
 
     <section data-nav="About" id="about">
       <div class="container">
-        <h2>About</h2>
-        <p>This a simple, extensible client-side validation object. It's "simple" because it includes only a
+        <h2>Overview</h2>
+        <p>This a simple, extensible client-side validation class. It's "simple" because it includes only a
           small and basic set of valdation functions. However, it's very easily extensible so you may add
-          your own types of validation methods.</p>
+          your own types of custom validation.</p>
 
-        <h3>Introduction</h3>
-        <p>There are quite a few client-side validators out there. However, while most require a particular
-          accompanying Javascript framework, this one does not. Additionally, rather than a bloaty,
-          full-featured validator, the approach taken  herein is to create a basic validator that covers most
-          general use-cases. If it doesn't cover yours, you can easily add your own custom tests.</p>
+        <p>While most other Validators require a particular accompanying
+           Javascript framework, this one does not. Additionally, rather than
+           a bloaty, full-featured validator, the approach taken herein is to
+           create a basic validator that covers most general use-cases. If it
+           doesn't cover yours, you can easily add any required functionality.
+        </p>
       </div>
     </section>
 
@@ -155,15 +156,14 @@
 
         <h3>Check fields in a form</h3>
         <pre><code class="language-javascript">
-  var validator = new Validator();
   var form = document.querySelector('#demo-form');
-  var valid = validator.check(form);
+  var valid = Validator.check(form);
         </code></pre>
 
         <h3>Adding a custom rule</h3>
         <pre><code class="language-javascript">
   // add a rule called "count" that checks an input's length
-  validator.updateRule('count', function count(val) {
+  Validator.updateRule('count', function count(val) {
     return val.length <= 40;
   });
         </code></pre>
