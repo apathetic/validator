@@ -45,7 +45,7 @@ Validator.updateRule('count', function count(val) {
 ## Methods
 
 | method | args | description |
-| ------ | ----------- |
+| ------ | ----------- | ---------| 
 | check() | element (HTMLElement), success (Function) | Pass in a field or a DOM fragment. Checks if field (or fields within the fragment) are valid according to any data-validate/required attributes |
 | updateRule() | name (String), validator (Function) | Add your own validation function. The validation function receives the field value to check against. Use your new rule by placing _data-validate="name"_ on a field |
 
