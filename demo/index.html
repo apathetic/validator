@@ -124,7 +124,7 @@
             </li>
           </ul>
 
-          <button class="button">Submit</button>
+          <button class="button button--default">Submit</button>
 
           <div class="hidden valid">Congrats, no errors here!</div>
         </form>
@@ -132,16 +132,9 @@
       </div>
     </section>
 
-    <section data-nav="Prereqs" id="prereqs">
+    <section data-nav="Browsers" id="browsers">
       <div class="container">
-        <h2>Prereqs</h2>
-        <p>none.</p>
-      </div>
-    </section>
-
-    <section data-nav="Compatibility" id="compatibility">
-      <div class="container">
-        <h2>Compatibility</h2>
+        <h2>Browser Support</h2>
         <ul class="bullets">
           <li>IE8+</li>
           <li>Firefox, Webkit, Opera</li>
@@ -160,18 +153,35 @@
   var valid = Validator.check(form);
         </code></pre>
 
+        <pre><code class="language-html">
+  &lt;form id="demo-form">
+    &lt;input id="email" name="email" data-validate="email" required />
+  &lt;/form>
+        </code></pre>
+
+        <h3>Check a form section</h3>
+        <p>This is useful if you have multi-page forms, or wish to selectively validate sections.</p>
+        <pre><code class="language-javascript">
+  var fieldset = document.querySelectorAll('fieldset');
+  var valid = Validator.check(fieldset[0]);
+        </code></pre>
+
         <h3>Adding a custom rule</h3>
         <pre><code class="language-javascript">
   // add a rule called "count" that checks an input's length
-  Validator.updateRule('count', function count(val) {
+  Validator.addRule('count', function(val) {
     return val.length <= 40;
   });
+        </code></pre>
+
+        <pre><code class="language-html">
+  &lt;textarea data-validate="count" required>40 characters or less, here&lt;/textarea>
         </code></pre>
 
       </div>
     </section>
 
-    <section data-nav="Options" id="options">
+    <section data-nav="API" id="api">
       <div class="container">
         <h2>API</h2>
         <div class="table-responsive">
@@ -185,19 +195,41 @@
             </thead>
             <tbody>
               <tr>
-                <td>check</td>
-                <td>element,<br />function success()</td>
-                <td>Pass in a field or a DOM element. Checks if field (or fields within the DOM element)
-                  are valid according to any data-validate / required attributes on each field.
-                </td>
+                <td>check()</td>
+                <td>element (HTMLElement)<br>success (Function)</td>
+                <td>Pass in a field or a DOM fragment. Checks if field (or fields within the fragment) are valid according to any data-validate/required attributes.</td>
               </tr>
               <tr>
-                <td>updateRule</td>
-                <td>name,<br />function validator(value)</td>
-                <td>Create your own validation rule. Give it a <em>name</em> and the function to be used when
-                  validating a field. Use your new rule by placing <em>data-validate="name"</em> on a field
-                  to validate. The validation function gets the field value to check against.
-                </td>
+                <td>addRule()</td>
+                <td>name (String)<br>validator (Function)</td>
+                <td>Add your own validation function. The validation function receives the field value to check against. Use your new rule by placing <em>data-validate="name"</em> on a field.</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+
+    <section data-nav="Events" id="events">
+      <div class="container">
+        <h2>Events</h2>
+        <div class="table-responsive">
+          <table class="table table-bordered table-striped">
+            <thead>
+              <tr>
+                <th>event</th>
+                <th>description</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>validation:failure</td>
+                <td>Triggered when a form/section fails validation. The Event target is the form/section used.</td>
+              </tr>
+              <tr>
+                <td>validation:success</td>
+                <td>Triggered when a form/section passes validation. The Event target is the form/section used.</td>
               </tr>
             </tbody>
           </table>
@@ -218,12 +250,11 @@
     function validate() {
       var form = document.querySelector('#demo-form');
       var message = document.querySelector('.valid');
-      // var validator = new Validator();
 
       /*
        * You update it with your own rules!
        */
-      Validator.updateRule('count', function count(val) {
+      Validator.addRule('count', function count(val) {
         return val.length <= 40;
       });
 
@@ -257,6 +288,10 @@
       });
     }
 
+
+    /*
+     * Helper function
+     */
     function characterCounter() {
       var textarea = document.querySelector('textarea');
       var count = document.querySelector('.character-count');
@@ -278,8 +313,6 @@
 
     window.addEventListener('DOMContentLoaded', validate);
     window.addEventListener('DOMContentLoaded', characterCounter);
-
-
 </script>
 
 

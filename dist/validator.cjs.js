@@ -32,7 +32,7 @@ var validator = {
    * @param  {regex} updatedRule The new regex to add.
    * @return {void}
    */
-  updateRule: function(ruleName, updatedRule) {
+  addRule: function(ruleName, updatedRule) {
     rules[ruleName] = updatedRule;
   },
 

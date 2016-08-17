@@ -21,19 +21,23 @@ var form = document.querySelector('#userForm');
 var valid = Validator.check(form);
 ```
 
-**Check a field**
-```javascript
-var field = document.querySelector('#email');
-var valid = Validator.check(field);
-```
 ```html
-<input id="email" name="email" data-validate="email" required />
+<form id="userForm">
+  <input id="email" name="email" data-validate="email" required />
+</form>
+```
+
+**Check a form section**
+This is useful if you have multi-page forms, or wish to selectively validate sections.
+```javascript
+var fieldset = document.querySelectorAll('fieldset');
+var valid = Validator.check(fieldset[0]);
 ```
 
 **Add a custom rule**
 ```javascript
 // add a rule called "count" that checks an input's length
-Validator.updateRule('count', function count(val) {
+Validator.addRule('count', function count(val) {
   return val.length <= 40;
 });
 ```
@@ -41,13 +45,20 @@ Validator.updateRule('count', function count(val) {
 <textarea data-validate="count" required>40 characters or less, here</textarea>
 ```
 
-
 ## Methods
 
 | method | args | description |
-| ------ | ----------- | ---------| 
+| ------ | ----------- | ---------|
 | check() | element (HTMLElement), success (Function) | Pass in a field or a DOM fragment. Checks if field (or fields within the fragment) are valid according to any data-validate/required attributes |
-| updateRule() | name (String), validator (Function) | Add your own validation function. The validation function receives the field value to check against. Use your new rule by placing _data-validate="name"_ on a field |
+| addRule() | name (String), validator (Function) | Add your own validation function. The validation function receives the field value to check against. Use your new rule by placing _data-validate="name"_ on a field |
+
+
+## Events
+
+| Event | description |
+| ------ | ---------|
+| validation:failure | Triggered when a form/section fails validation. The target is the form/section used |
+| validation:success | Triggered when a form/section passes validation. The target is the form/section used |
 
 ## Demo
 
